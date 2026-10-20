@@ -6,7 +6,7 @@ class Hivemind < Formula
   sha256 "48fb24250609e160379018d56dc84e57342ab569c94d3b39dd4441dbd3a56efc"
   license "MIT"
 
-  on_arm64 do
+  on_arm do
     # Apple silicon: install the published binary, no toolchain needed.
     on_macos do
       url "https://github.com/akhil-gautam/hivemind/releases/download/v0.2.0/hivemind-aarch64-apple-darwin"
