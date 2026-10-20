@@ -3,8 +3,8 @@ class Hivemind < Formula
   homepage "https://github.com/akhil-gautam/hivemind"
   # The repository is public, so the source is cloned over plain HTTPS: no
   # token, no SSH key, no credential helper.
-  url "https://github.com/akhil-gautam/hivemind.git", tag: "v0.4.0"
-  version "0.4.0"
+  url "https://github.com/akhil-gautam/hivemind.git", tag: "v0.4.1"
+  version "0.4.1"
   license "MIT"
 
   def install
