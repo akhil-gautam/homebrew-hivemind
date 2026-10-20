@@ -6,13 +6,14 @@ class Hivemind < Formula
   license "MIT"
 
   def install
-    raise "cargo not found — install Rust first (brew install rust)" unless system(
-      "which", "cargo", out: File::NULL, err: File::NULL
-    )
+    cargo = ENV["PATH"].to_s.split(File::PATH_SEPARATOR)
+                  .map { |dir| File.join(dir, "cargo") }
+                  .find { |path| File.executable?(path) }
+    raise "cargo not found — install Rust first (brew install rust)" if cargo.nil?
 
     # Keep the build out of the user's ~/.cargo
     ENV["CARGO_HOME"] = buildpath/".cargo-home"
-    system "cargo", "install", "--path", ".", "--locked", "--root", staging_dir
+    system cargo, "install", "--path", ".", "--locked", "--root", staging_dir
     bin.install Dir["#{staging_dir}/bin/hivemind"]
   end
 
