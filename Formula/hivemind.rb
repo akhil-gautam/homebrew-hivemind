@@ -6,9 +6,13 @@ class Hivemind < Formula
   license "MIT"
 
   def install
-    cargo = ENV["PATH"].to_s.split(File::PATH_SEPARATOR)
-                  .map { |dir| File.join(dir, "cargo") }
-                  .find { |path| File.executable?(path) }
+    candidates = [
+      ENV["CARGO"],
+      File.join(HOMEBREW_PREFIX.to_s, "bin", "cargo"),
+      File.join(Dir.home, ".cargo", "bin", "cargo"),
+    ].compact
+    candidates.concat(ENV["PATH"].to_s.split(File::PATH_SEPARATOR).map { |dir| File.join(dir, "cargo") })
+    cargo = candidates.find { |path| File.executable?(path) }
     raise "cargo not found — install Rust first (brew install rust)" if cargo.nil?
 
     # Keep the build out of the user's ~/.cargo
