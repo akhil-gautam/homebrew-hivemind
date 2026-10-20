@@ -6,6 +6,10 @@ class Hivemind < Formula
   license "MIT"
 
   def install
+    # Homebrew builds with a trimmed PATH that hides brew itself, which the
+    # rustc shim needs to find the real compiler.
+    ENV["PATH"] = "#{HOMEBREW_PREFIX}/bin:#{ENV["PATH"]}"
+
     candidates = [
       ENV["CARGO"],
       File.join(HOMEBREW_PREFIX.to_s, "bin", "cargo"),
