@@ -14,14 +14,14 @@ class Hivemind < Formula
     end
   end
 
+  on_linux do
+    depends_on "rust" => :build
+  end
+
   on_intel do
     on_macos do
       depends_on "rust" => :build
     end
-  end
-
-  on_linux do
-    depends_on "rust" => :build
   end
 
   def install
