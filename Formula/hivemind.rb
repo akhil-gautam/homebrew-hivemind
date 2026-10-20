@@ -17,8 +17,8 @@ class Hivemind < Formula
 
     # Keep the build out of the user's ~/.cargo
     ENV["CARGO_HOME"] = buildpath/".cargo-home"
-    system cargo, "install", "--path", ".", "--locked", "--root", staging_dir
-    bin.install Dir["#{staging_dir}/bin/hivemind"]
+    system cargo, "install", "--path", ".", "--locked", "--root", buildpath/"cargo-install"
+    bin.install Dir["#{buildpath}/cargo-install/bin/hivemind"]
   end
 
   test do
